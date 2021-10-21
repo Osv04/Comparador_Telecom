@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProyectoArquictecturaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Empresa">
+    <Key>
+      <PropertyRef Name="IdEmpresa" />
+    </Key>
+    <Property Name="IdEmpresa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombreEmpresa" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Telefono" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Direccion" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Planes">
+    <Key>
+      <PropertyRef Name="IdPlan" />
+    </Key>
+    <Property Name="IdPlan" Type="int" Nullable="false" />
+    <Property Name="NombrePlan" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Decripcion" Type="nvarchar" MaxLength="100" />
+    <Property Name="Precio" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="IdEmpresa" Type="int" />
+  </EntityType>
+  <Association Name="FK_Empresa_Empresa">
+    <End Role="Empresa" Type="Self.Empresa" Multiplicity="1" />
+    <End Role="Empresa1" Type="Self.Empresa" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Empresa">
+        <PropertyRef Name="IdEmpresa" />
+      </Principal>
+      <Dependent Role="Empresa1">
+        <PropertyRef Name="IdEmpresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdEmpresa">
+    <End Role="Empresa" Type="Self.Empresa" Multiplicity="0..1" />
+    <End Role="Planes" Type="Self.Planes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empresa">
+        <PropertyRef Name="IdEmpresa" />
+      </Principal>
+      <Dependent Role="Planes">
+        <PropertyRef Name="IdEmpresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ProyectoArquictecturaModelStoreContainer">
+    <EntitySet Name="Empresa" EntityType="Self.Empresa" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Planes" EntityType="Self.Planes" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Empresa_Empresa" Association="Self.FK_Empresa_Empresa">
+      <End Role="Empresa" EntitySet="Empresa" />
+      <End Role="Empresa1" EntitySet="Empresa" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdEmpresa" Association="Self.FK_IdEmpresa">
+      <End Role="Empresa" EntitySet="Empresa" />
+      <End Role="Planes" EntitySet="Planes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

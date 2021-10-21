@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProyectoArquictecturaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Empresa">
+    <Key>
+      <PropertyRef Name="IdEmpresa" />
+    </Key>
+    <Property Name="IdEmpresa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NombreEmpresa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Telefono" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Empresa1" Relationship="Self.FK_Empresa_Empresa" FromRole="Empresa" ToRole="Empresa1" />
+    <NavigationProperty Name="Empresa2" Relationship="Self.FK_Empresa_Empresa" FromRole="Empresa1" ToRole="Empresa" />
+    <NavigationProperty Name="Planes" Relationship="Self.FK_IdEmpresa" FromRole="Empresa" ToRole="Planes" />
+  </EntityType>
+  <EntityType Name="Plane">
+    <Key>
+      <PropertyRef Name="IdPlan" />
+    </Key>
+    <Property Name="IdPlan" Type="Int32" Nullable="false" />
+    <Property Name="NombrePlan" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Decripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Precio" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="IdEmpresa" Type="Int32" />
+    <NavigationProperty Name="Empresa" Relationship="Self.FK_IdEmpresa" FromRole="Planes" ToRole="Empresa" />
+  </EntityType>
+  <Association Name="FK_Empresa_Empresa">
+    <End Role="Empresa" Type="Self.Empresa" Multiplicity="1" />
+    <End Role="Empresa1" Type="Self.Empresa" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Empresa">
+        <PropertyRef Name="IdEmpresa" />
+      </Principal>
+      <Dependent Role="Empresa1">
+        <PropertyRef Name="IdEmpresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdEmpresa">
+    <End Role="Empresa" Type="Self.Empresa" Multiplicity="0..1" />
+    <End Role="Planes" Type="Self.Plane" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empresa">
+        <PropertyRef Name="IdEmpresa" />
+      </Principal>
+      <Dependent Role="Planes">
+        <PropertyRef Name="IdEmpresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ProyectoArquictecturaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Empresas" EntityType="Self.Empresa" />
+    <EntitySet Name="Planes" EntityType="Self.Plane" />
+    <AssociationSet Name="FK_Empresa_Empresa" Association="Self.FK_Empresa_Empresa">
+      <End Role="Empresa" EntitySet="Empresas" />
+      <End Role="Empresa1" EntitySet="Empresas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdEmpresa" Association="Self.FK_IdEmpresa">
+      <End Role="Empresa" EntitySet="Empresas" />
+      <End Role="Planes" EntitySet="Planes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

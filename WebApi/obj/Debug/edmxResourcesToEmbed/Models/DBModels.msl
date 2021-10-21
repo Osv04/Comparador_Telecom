@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ProyectoArquictecturaModelStoreContainer" CdmEntityContainer="ProyectoArquictecturaEntities">
+    <EntitySetMapping Name="Empresas">
+      <EntityTypeMapping TypeName="ProyectoArquictecturaModel.Empresa">
+        <MappingFragment StoreEntitySet="Empresa">
+          <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+          <ScalarProperty Name="NombreEmpresa" ColumnName="NombreEmpresa" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Planes">
+      <EntityTypeMapping TypeName="ProyectoArquictecturaModel.Plane">
+        <MappingFragment StoreEntitySet="Planes">
+          <ScalarProperty Name="IdPlan" ColumnName="IdPlan" />
+          <ScalarProperty Name="NombrePlan" ColumnName="NombrePlan" />
+          <ScalarProperty Name="Decripcion" ColumnName="Decripcion" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+          <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
