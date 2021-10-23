@@ -21,7 +21,18 @@ namespace Mvc.Controllers
             WebApiClient.DefaultRequestHeaders.Add("Accept", "application/json;odata=verbose");
             empList = response.Content.ReadAsAsync<IEnumerable<mvcEmpresaModel>>().Result;
             return View(empList);
+        }
 
+        public ActionResult AgregaroEditar(int id = 0)
+        {
+            return View(new mvcEmpresaModel());
+
+        }
+        [HttpPost]
+        public ActionResult AgregaroEditar(mvcEmpresaModel emp)
+        {
+            HttpResponseMessage response = WebApiClient.PostAsJsonAsync("Empresas",emp).Result;
+            return RedirectToAction("Index");
         }
     }
 }
