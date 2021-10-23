@@ -4,33 +4,29 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<br/>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a href="@Url.Action("AgregaroEditar","Empresas")" class="btn btn-default">Create new</a>
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.IdEmpresa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NombreEmpresa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Telefono)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Direccion)
-        </th>
-        <th></th>
-    </tr>
+<table class="table table-striped">
+    <thead class="table-bordered">
+        <tr>            
+            <th>
+                @Html.DisplayNameFor(model => model.NombreEmpresa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefono)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Direccion)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdEmpresa)
-        </td>
+    <tr>        
         <td>
             @Html.DisplayFor(modelItem => item.NombreEmpresa)
         </td>
