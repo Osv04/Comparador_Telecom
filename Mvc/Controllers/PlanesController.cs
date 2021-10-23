@@ -10,13 +10,17 @@ namespace Mvc.Controllers
 {
     public class PlanesController : Controller
     {
+        public static HttpClient WebApiClient = new HttpClient();
         // GET: Planes
         public ActionResult Index()
         {
-            IEnumerable<mvcEmpresaModel> empList2;
-            HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("Planes").Result;
-            empList2 = response.Content.ReadAsAsync<IEnumerable<mvcEmpresaModel>>().Result;
-            return View(empList2);
+            WebApiClient.BaseAddress = new Uri("https://localhost:44398/api/");
+            IEnumerable<mvcPlanesModel> planList;
+            HttpResponseMessage response = WebApiClient.GetAsync("Planes").Result;
+            WebApiClient.DefaultRequestHeaders.Accept.Clear();
+            WebApiClient.DefaultRequestHeaders.Add("Accept", "application/json;odata=verbose");
+            planList = response.Content.ReadAsAsync<IEnumerable<mvcPlanesModel>>().Result;
+            return View(planList);
         }
     }
 }
