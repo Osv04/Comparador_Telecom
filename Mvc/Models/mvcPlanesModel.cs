@@ -15,7 +15,7 @@ namespace Mvc.Models
         public string NombrePlan { get; set; }
 
         [Required(ErrorMessage = "This field is required")]
-        public string Decripcion { get; set; }
+        public string Descripcion { get; set; }
 
         [Required(ErrorMessage = "This field is required")]
         public Nullable<decimal> Precio { get; set; }

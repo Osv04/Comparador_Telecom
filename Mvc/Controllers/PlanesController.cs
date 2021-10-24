@@ -19,22 +19,21 @@ namespace Mvc.Controllers
                 WebApiClient.BaseAddress = new Uri("https://localhost:44398/api/");
             }         
             IEnumerable<mvcPlanesModel> planList;
-            HttpResponseMessage response = WebApiClient.GetAsync("Plane").Result;
+            HttpResponseMessage response = WebApiClient.GetAsync("Planes").Result;
             WebApiClient.DefaultRequestHeaders.Accept.Clear();
             WebApiClient.DefaultRequestHeaders.Add("Accept", "application/json;odata=verbose");
             planList = response.Content.ReadAsAsync<IEnumerable<mvcPlanesModel>>().Result;
             return View(planList);
         }
 
-        public ActionResult AgregaroEditar(int id = 0)
+        public ActionResult AgregaroEditarPlanes(int id = 0)
         {
             return View(new mvcPlanesModel());
-
         }
         [HttpPost]
-        public ActionResult AgregaroEditar(mvcPlanesModel plan)
+        public ActionResult AgregaroEditarPlanes(mvcPlanesModel plan)
         {
-            HttpResponseMessage response = WebApiClient.PostAsJsonAsync("Plane", plan).Result;
+            HttpResponseMessage response = WebApiClient.PostAsJsonAsync("Planes", plan).Result;
             return RedirectToAction("Index");
         }
     }

@@ -1,6 +1,6 @@
 ﻿@model Mvc.Models.mvcPlanesModel
 @{
-    ViewBag.Title = "AgregaroEditar";
+    ViewBag.Title = "AgregaroEditarPlanes";
 }
 
 <div class="form-body">
@@ -16,9 +16,9 @@
         </div>
 
         <div class=" form-group">
-            @Html.LabelFor(model => model.Decripcion);
-            @Html.EditorFor(model => model.Decripcion);
-            @Html.ValidationMessageFor(model => model.Decripcion);
+            @Html.LabelFor(model => model.Descripcion);
+            @Html.EditorFor(model => model.Descripcion);
+            @Html.ValidationMessageFor(model => model.Descripcion);
         </div>
 
         <div class=" form-group">

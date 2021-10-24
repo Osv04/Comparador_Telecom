@@ -40,10 +40,6 @@ namespace WebApi.Controllers
         public IHttpActionResult PutPlane(int id, Plane plane)
         {
 
-            if (id != plane.IdPlan)
-            {
-                return BadRequest();
-            }
 
             db.Entry(plane).State = EntityState.Modified;
 
@@ -98,10 +94,7 @@ namespace WebApi.Controllers
         public IHttpActionResult DeletePlane(int id)
         {
             Plane plane = db.Planes.Find(id);
-            if (plane == null)
-            {
-                return NotFound();
-            }
+
 
             db.Planes.Remove(plane);
             db.SaveChanges();
