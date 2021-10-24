@@ -14,7 +14,10 @@ namespace Mvc.Controllers
         // GET: Empresas
         public ActionResult Index()
         {
-            WebApiClient.BaseAddress = new Uri("https://localhost:44398/api/");
+            if (WebApiClient.BaseAddress == null)
+            {
+                WebApiClient.BaseAddress = new Uri("https://localhost:44398/api/");
+            }
             IEnumerable<mvcEmpresaModel> empList;
             HttpResponseMessage response = WebApiClient.GetAsync("Empresas").Result;
             WebApiClient.DefaultRequestHeaders.Accept.Clear();
