@@ -1,0 +1,46 @@
+﻿@model Mvc.Models.mvcPlanesModel
+@{
+    ViewBag.Title = "AgregaroEditar";
+}
+
+<div class="form-body">
+
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(model => model.IdPlan);
+
+        <div class=" form-group">
+            @Html.LabelFor(model => model.NombrePlan);
+            @Html.EditorFor(model => model.NombrePlan);
+            @Html.ValidationMessageFor(model => model.NombrePlan);
+        </div>
+
+        <div class=" form-group">
+            @Html.LabelFor(model => model.Decripcion);
+            @Html.EditorFor(model => model.Decripcion);
+            @Html.ValidationMessageFor(model => model.Decripcion);
+        </div>
+
+        <div class=" form-group">
+            @Html.LabelFor(model => model.Precio);
+            @Html.EditorFor(model => model.Precio);
+            @Html.ValidationMessageFor(model => model.Precio);
+        </div>
+
+        <div class=" form-group">
+            @Html.LabelFor(model => model.Empresa);
+            @Html.EditorFor(model => model.Empresa);
+            @Html.ValidationMessageFor(model => model.Empresa);
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Submit" class="btn-button" />
+            <input type="reset" value="Reset" class="btn-button" />
+        </div>
+    }
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval");
+
+}
