@@ -18,6 +18,12 @@ namespace Mvc
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Empresas", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "DefaultPlanes",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Planes", action = "Index", id = UrlParameter.Optional }
+            );
         }
     }
 }

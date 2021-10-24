@@ -14,13 +14,27 @@ namespace Mvc.Controllers
         // GET: Planes
         public ActionResult Index()
         {
-            WebApiClient.BaseAddress = new Uri("https://localhost:44398/api/");
+            if (WebApiClient.BaseAddress == null)
+            {
+                WebApiClient.BaseAddress = new Uri("https://localhost:44398/api/");
+            }         
             IEnumerable<mvcPlanesModel> planList;
             HttpResponseMessage response = WebApiClient.GetAsync("Planes").Result;
             WebApiClient.DefaultRequestHeaders.Accept.Clear();
             WebApiClient.DefaultRequestHeaders.Add("Accept", "application/json;odata=verbose");
             planList = response.Content.ReadAsAsync<IEnumerable<mvcPlanesModel>>().Result;
             return View(planList);
+        }
+
+        public ActionResult AgregaroEditarPlanes(int id = 0)
+        {
+            return View(new mvcPlanesModel());
+        }
+        [HttpPost]
+        public ActionResult AgregaroEditarPlanes(mvcPlanesModel plan)
+        {
+            HttpResponseMessage response = WebApiClient.PostAsJsonAsync("Planes", plan).Result;
+            return RedirectToAction("Index");
         }
     }
 }
