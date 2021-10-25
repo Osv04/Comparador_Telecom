@@ -28,13 +28,36 @@ namespace Mvc.Controllers
 
         public ActionResult AgregaroEditar(int id = 0)
         {
-            return View(new mvcEmpresaModel());
-
+            if (id == 0) 
+            {
+                return View(new mvcEmpresaModel());
+            }
+            else 
+            {
+                HttpResponseMessage response = WebApiClient.GetAsync("Empresas/" + id.ToString()).Result;
+                return View(response.Content.ReadAsAsync<mvcEmpresaModel>().Result);
+            }
         }
         [HttpPost]
         public ActionResult AgregaroEditar(mvcEmpresaModel emp)
         {
-            HttpResponseMessage response = WebApiClient.PostAsJsonAsync("Empresas",emp).Result;
+            if (emp.IdEmpresa == 0) 
+            {
+                HttpResponseMessage response = WebApiClient.PostAsJsonAsync("Empresas", emp).Result;
+                TempData["SuccessMessage"] = "Empresa Guardada.";
+            }
+            else 
+            {
+                HttpResponseMessage response = WebApiClient.PutAsJsonAsync("Empresas/" + emp.IdEmpresa, emp).Result;
+                TempData["SuccessMessage"] = "Cambios Guardados.";
+            }
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Delete(int id = 0) 
+        {
+            HttpResponseMessage response = WebApiClient.DeleteAsync("Empresas/" + id.ToString()).Result;
+            TempData["SuccessMessage"] = "Empresa Borrada.";
             return RedirectToAction("Index");
         }
     }

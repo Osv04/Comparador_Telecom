@@ -19,7 +19,6 @@ namespace Mvc.Models
 
         [Required(ErrorMessage = "This field is required")]
         public Nullable<decimal> Precio { get; set; }
-
         public Nullable<int> IdEmpresa { get; set; }
 
         [Required(ErrorMessage = "This field is required")]

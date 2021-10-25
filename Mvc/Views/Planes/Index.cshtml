@@ -7,7 +7,7 @@
 <h2>Index</h2>
 
 <p>
-    <a href="@Url.Action("AgregaroEditarPlanes","Planes")" class="btn btn-default">Crear Plan</a>
+    @*<a href="@Url.Action("AgregaroEditarPlanes","Planes")" class="btn btn-default">Crear Plan</a>*@
 </p>
 
 <table class="table">
@@ -49,11 +49,30 @@
                 @Html.DisplayFor(modelItem => item.IdEmpresa)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @*<a href="@Url.Action("AgregaroEditarPlanes", "Planes", new { id = item.IdPlan})" class="btn btn-default"><i class="fa fa-EditorPlan"></i> Editar</a>
+                <a onclick="Delete(@item.IdPlan)" class="btn btn-default"><i class="fa fa-BorradorPlan"></i> Borrar</a>*@
             </td>
         </tr>
     }
 
 </table>
+
+@section scripts {
+<script>
+    $(function () {
+        var successMessage = '@TempData["SuccessMessage"]'
+        if (successMessage != '')
+        {
+            alertify.success(successMessage);
+        }
+    });
+    function Delete(id)
+    {
+        alertify.confirm('Confirmacion de Cambio', 'Esta seguro de querer borrar este plan?',
+            function () {
+                window / location.href = '@Url.Action("Delete", "Planes")/' + id;
+            }, null
+        );
+    }
+</script>
+}

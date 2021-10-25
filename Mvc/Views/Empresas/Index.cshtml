@@ -37,11 +37,30 @@
             @Html.DisplayFor(modelItem => item.Direccion)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            <a href="@Url.Action("AgregaroEditar", "Empresas", new { id = item.IdEmpresa})" class="btn btn-default"><i class="fa fa-EditorEmpresa"></i> Editar</a>
+            <a href="@Url.Action("Delete", "Empresas", new { id = item.IdEmpresa})" class="btn btn-default"><i class="fa fa-EditorEmpresa"></i> Borrar</a>
         </td>
     </tr>
 }
 
 </table>
+
+@section scripts {
+<script>
+    $(function () {
+        var successMessage = '@TempData["SuccessMessage"]'
+        if (successMessage != '')
+        {
+            alertify.success(successMessage);
+        }
+    });
+    function Delete(id)
+    {
+        alertify.confirm('Confirmacion de Cambio', 'Esta seguro de querer borrar esta empresa?',
+            function () {
+                window / location.href = '@Url.Action("Delete", "Empresas")/' + id;
+            }, null
+        );
+    }
+</script>
+} 
