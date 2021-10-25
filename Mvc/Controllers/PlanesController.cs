@@ -28,12 +28,35 @@ namespace Mvc.Controllers
 
         public ActionResult AgregaroEditarPlanes(int id = 0)
         {
-            return View(new mvcPlanesModel());
+            if (id == 0)
+            {
+                return View(new mvcPlanesModel());
+            }
+            else
+            {
+                HttpResponseMessage response = WebApiClient.GetAsync("Planes/" + id.ToString()).Result;
+                return View(response.Content.ReadAsAsync<mvcPlanesModel>().Result);
+            }
         }
         [HttpPost]
         public ActionResult AgregaroEditarPlanes(mvcPlanesModel plan)
         {
-            HttpResponseMessage response = WebApiClient.PostAsJsonAsync("Planes", plan).Result;
+            if (plan.IdPlan == 0)
+            {
+                HttpResponseMessage response = WebApiClient.PostAsJsonAsync("Planes", plan).Result;
+                TempData["SuccessMessage"] = "Plan Guardado.";
+            }
+            else
+            {
+                HttpResponseMessage response = WebApiClient.PutAsJsonAsync("Planes/" + plan.IdPlan, plan).Result;
+                TempData["SuccessMessage"] = "Cambios Guardados.";
+            }
+            return RedirectToAction("Index");
+        }
+        public ActionResult Delete(int id)
+        {
+            HttpResponseMessage response = WebApiClient.DeleteAsync("Planes/" + id.ToString()).Result;
+            TempData["SuccessMessage"] = "Plan Borrado.";
             return RedirectToAction("Index");
         }
     }
