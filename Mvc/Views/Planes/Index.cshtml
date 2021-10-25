@@ -7,7 +7,7 @@
 <h2>Index</h2>
 
 <p>
-    <a href="@Url.Action("AgregaroEditarPlanes","Planes")" class="btn btn-default">Crear Plan</a>
+    @*<a href="@Url.Action("AgregaroEditarPlanes","Planes")" class="btn btn-default">Crear Plan</a>*@
 </p>
 
 <table class="table">
@@ -49,8 +49,8 @@
                 @Html.DisplayFor(modelItem => item.IdEmpresa)
             </td>
             <td>
-                <a href="@Url.Action("AgregaroEditarPlanes", "Planes", new { id = item.IdPlan})" class="btn btn-default"><i class="fa fa-EditorPlan"></i> Editar</a>
-                <a onclick="Delete(@item.IdPlan)" class="btn btn-default"><i class="fa fa-BorradorPlan"></i> Borrar</a>
+                @*<a href="@Url.Action("AgregaroEditarPlanes", "Planes", new { id = item.IdPlan})" class="btn btn-default"><i class="fa fa-EditorPlan"></i> Editar</a>
+                <a onclick="Delete(@item.IdPlan)" class="btn btn-default"><i class="fa fa-BorradorPlan"></i> Borrar</a>*@
             </td>
         </tr>
     }

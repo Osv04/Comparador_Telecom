@@ -54,7 +54,7 @@ namespace Mvc.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Delete(int id) 
+        public ActionResult Delete(int id = 0) 
         {
             HttpResponseMessage response = WebApiClient.DeleteAsync("Empresas/" + id.ToString()).Result;
             TempData["SuccessMessage"] = "Empresa Borrada.";
